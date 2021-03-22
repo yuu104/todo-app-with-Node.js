@@ -40,6 +40,8 @@
   send.addEventListener('click', () => {
     if(add.value !== "") {
       document.todo_form.submit();
+    } else {
+      alert("タスクを入力してください");
     }
   });
 
@@ -105,6 +107,8 @@
       } 
     });
   }
+
+
 
 
 

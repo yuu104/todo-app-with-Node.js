@@ -33,10 +33,10 @@
 
   app.get('/', (req, res) => {
     con.query(
-      'SELECT * FROM doTasks ORDER BY priority',
+      'SELECT * FROM doTasks WHERE isDone="no" ORDER BY priority',
       (error_d, results_d) => {
         con.query(
-          'SELECT * FROM compedTasks',
+          'SELECT * FROM doTasks WHERE isDone="yes"',
           (error_c, results_c) => {
             res.render('index.ejs', {doItems: results_d, compedItems: results_c});
           }
@@ -46,8 +46,8 @@
   });
 
   app.post('/create', (req, res) => {
-    con.query(
-      'INSERT INTO doTasks(task, priority) VALUES (?, ?)',
+    con.query( 
+      'INSERT INTO doTasks(task, priority, isDone) VALUES (?, ?, "no")',
       [req.body.taskName, req.body.priority],
       (error, results) => {
         res.redirect('/');
@@ -65,35 +65,23 @@
     );
   });
 
-  app.post('/comped/:task/:id/:priority', (req, res) => {
+  app.post('/comped/:id', (req, res) => {
     con.query(
-      'INSERT INTO compedTasks(task, priority) VALUES (?, ?)',
-      [req.params.task, req.params.priority],
-      (error_c, results_c) => {
-        con.query(
-          'DELETE FROM doTasks WHERE id = ?',
-          [req.params.id],
-          (error_d, results_d) => {
-            res.redirect('/');
-          }
-        );
+      'UPDATE doTasks SET isDone="yes" WHERE id=?',
+      [req.params.id],
+      (error, results) => {
+        res.redirect('/');
       }
     );
   });
 
-  app.post('/reCreate/:task/:id/:priority', (req, res) => {
+  app.post('/reCreate/:id', (req, res) => {
     con.query(
-      'INSERT INTO doTasks(task, priority) VALUES(?, ?)',
-      [req.params.task, req.params.priority],
-      (error_d, results_d) => {
-        con.query(
-          'DELETE FROM compedTasks WHERE id = ?',
-          [req.params.id],
-          (error_c, results_c) => {
-            res.redirect('/');
-          }
-        );
-      } 
+      'UPDATE doTasks SET isDone="no" WHERE id=?',
+      [req.params.id],
+      (error, results) => {
+        res.redirect('/');
+      }
     );
   });
 
