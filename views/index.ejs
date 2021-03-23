@@ -62,7 +62,7 @@
         <% let i = 0; %>
         <% doItems.forEach(item => { %>
             <li class="task_li">
-              <form action="/comped/<%= item.task %>/<%= item.id %>/<%= item.priority %>" method="post" name="comped" class="checkbox_container <%= item.priority %> checkbox_container_task">
+              <form action="/comped/<%= item.id %>" method="post" name="comped" class="checkbox_container <%= item.priority %> checkbox_container_task">
                 <a href="#" onclick="this.parentNode.submit()" class="checkbox"></a>
               </form>
               <div class="todo_ul_contents">
@@ -109,7 +109,7 @@
       <ul id="comp_ul" class="todo_ul">
         <% compedItems.forEach(item=> { %>
           <li class="task_li">
-            <form action="/reCreate/<%= item.task %>/<%= item.id %>/<%= item.priority %>" method="POST" name="reCreate" class="checkbox_container checked_container">
+            <form action="/reCreate/<%= item.id %>" method="POST" name="reCreate" class="checkbox_container checked_container">
               <a href="#" onclick="this.parentNode.submit()" class="checkbox checked"></a>
             </form>
             <div class="todo_ul_contents">
