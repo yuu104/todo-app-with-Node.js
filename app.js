@@ -38,7 +38,25 @@
         con.query(
           'SELECT * FROM doTasks WHERE isDone="yes"',
           (error_c, results_c) => {
-            res.render('index.ejs', {doItems: results_d, compedItems: results_c});
+            con.query(
+              'SELECT * FROM contPlan',
+              (error_p, results_p) => {
+                con.query(
+                  'SELECT COUNT(*), COUNT(isDone="no" OR NULL), COUNT(isDone="yes" OR NULL) FROM doTasks', 
+                  (error_count, results_count) => {
+                    res.render('make.ejs', 
+                    {
+                      doItems: results_d,
+                      compedItems: results_c,
+                      contPlans: results_p,
+                      countTotal: results_count[0]['COUNT(*)'],
+                      countTask: results_count[0]['COUNT(isDone="no" OR NULL)'],
+                      countComped: results_count[0]['COUNT(isDone="yes" OR NULL)']
+                    });
+                  }
+                );
+              }
+            );
           }
         );
       }
@@ -89,6 +107,26 @@
     con.query(
       'UPDATE doTasks SET task=?, priority=? WHERE id=?',
       [req.body.editTaskName, req.body.editPriority, req.params.id],
+      (error, results) => {
+        res.redirect('/');
+      }
+    );
+  });
+
+  app.post('/planing', (req, res) => {
+    con.query(
+      'INSERT INTO contPlan(estimate, measure) VALUES(?, ?)',
+      [req.body.estimate, req.body.measure],
+      (error, results) => {
+        res.redirect('/');
+      }
+    );
+  });
+
+  app.post('/contPlanDelete/:id', (req, res) => {
+    con.query(
+      'DELETE FROM contPlan WHERE id = ?',
+      [req.params.id],
       (error, results) => {
         res.redirect('/');
       }

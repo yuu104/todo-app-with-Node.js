@@ -4,15 +4,24 @@ body {
   padding: 0;
 }
 
-.todo_box {
+main {
   width: 90%;
-  max-width: 600px;
   margin: 0 auto;
+}
+
+.flexbox_1 {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+}
+
+.todo_box {
+  flex-basis: 55%;
 }
 
 .tasks, 
 .comps {
-  margin: 20px 0;
+  margin: 30px 0 30px 20px; 
 }
 
 .tasks.close,
@@ -357,6 +366,126 @@ body {
   background-color: #f5f5f5;
 }
 
+.sub_item {
+  flex-basis: 40%;
+}
+
+.cont_plan {
+  width: 100%;
+  border: 1px solid #dcdcdc;
+  border-radius: 10px;
+  padding: 30px;
+  box-sizing: border-box;
+}
+
+.cont_plan h3 {
+  text-align: center;
+  margin-top: 0;
+}
+
+.cont_plan_form {
+  width: 80%;
+}
+
+.cp_iptxt {
+	position: relative;
+	width: 100%;
+	margin: 0 0 30px 0;
+  box-sizing: border-box;
+}
+
+.cp_iptxt input[type='text'] {
+	font: 15px/24px sans-serif;
+	box-sizing: border-box;
+	width: 100%;
+	letter-spacing: 1px;
+	padding-left: 3em;
+}
+
+.cp_iptxt input[type='text']:focus {
+	outline: none;
+}
+
+.ef {
+	padding: 4px 0;
+	border: 0;
+	border-bottom: 1px solid #1b2538;
+	background-color: transparent;
+}
+
+.ef ~ .focus_line {
+	position: absolute;
+	bottom: 0;
+	left: 0;
+	width: 0;
+	height: 2px;
+	transition: 0.4s;
+	background-color: #6495ed;
+}
+
+.ef:focus ~ .focus_line,
+.cp_iptxt.ef ~ .focus_line {
+	width: 100%;
+	transition: 0.4s;
+}
+
+.ef ~ label {
+	position: absolute;
+	z-index: -1;
+	top: 4px;
+	left: 0;
+	width: 100%;
+	transition: 0.3s;
+	letter-spacing: 0.5px;
+	color: #aaaaaa;
+}
+
+.ef:focus ~ label, .cp_iptxt.ef ~ label {
+	font-size: 12px;
+	top: -16px;
+	transition: 0.3s;
+	color: #6495ed;
+}
+
+.cont_plan_ul {
+  padding-left: 20px;
+}
+
+.cont_plan_li {
+  margin-bottom: 20px;
+  position: relative;
+}
+
+.cont_plan_text {
+  margin: 0;
+}
+
+.cont_plan_delete {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+}
+
+.sub_item table {
+  width: 100%;
+  margin-top: 30px;
+}
+
+
+@media(max-width:1120px) {
+  main {
+    width: 80%;
+  }
+
+  .flexbox_1 {
+    display: block;
+  }
+
+  .sub_item {
+    max-width: 600px;
+    margin: 50px auto;
+  }
+}
 
 
 

@@ -23,7 +23,6 @@
 
 
 
-
   window.onload = function() {
     if(taskUl.childElementCount) {
       taskTitle.style.display = 'inline-block';
@@ -82,7 +81,6 @@
     add.style.backgroundColor = '#fff';
   });
 
-
   document.addEventListener('click', (e) => {
     if(!e.target.closest('#todo_form')) {
       todoForm.style.border = 'none';
@@ -107,9 +105,6 @@
       } 
     });
   }
-
-
-
 
 
 
