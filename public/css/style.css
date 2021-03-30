@@ -128,14 +128,18 @@ main {
 }
 
 .send {
+  opacity: 0.5;
+}
+
+.send:hover {
+  opacity: 1;
+}
+
+.send_task {
   display: block;
   width: 25px;
   height: 25px;
   margin: 0 0 0 auto;
-}
-
-.send svg {
-  color: #cdcdcd;
 }
 
 .todo_ul {
@@ -241,6 +245,7 @@ main {
   display: flex;
   align-items: center;
   padding-left: 10px;
+  padding-right: 20px;
 }
 
 .edit {
@@ -254,11 +259,15 @@ main {
   color: rgba(0,0,0,.36);
 }
 
+.edit_btn i {
+  font-size: 18px;
+}
+
 .edit_box {
   display: none;
   position: absolute;
   top: 30px;
-  left: -20px;
+  right: 0;
   box-shadow: 0 0 8px gray;
   background-color: #fff;
   padding: 10px;
@@ -344,6 +353,10 @@ main {
   text-decoration: none;
 }
 
+.delete_btn i {
+  font-size: 18px;
+}
+
 .comped_task_name {
   opacity: 0.5;
 }
@@ -384,7 +397,8 @@ main {
 }
 
 .cont_plan_form {
-  width: 80%;
+  width: 100%;
+  position: relative;
 }
 
 .cp_iptxt {
@@ -392,6 +406,10 @@ main {
 	width: 100%;
 	margin: 0 0 30px 0;
   box-sizing: border-box;
+}
+
+.cp_iptxt_measure {
+  width: 85%;
 }
 
 .cp_iptxt input[type='text'] {
@@ -447,29 +465,64 @@ main {
 	color: #6495ed;
 }
 
-.cont_plan_ul {
-  padding-left: 20px;
-}
-
-.cont_plan_li {
-  margin-bottom: 20px;
-  position: relative;
-}
-
-.cont_plan_text {
-  margin: 0;
-}
-
-.cont_plan_delete {
+.send_cont_plan {
   position: absolute;
   bottom: 0;
   right: 0;
 }
 
+.cont_plan_ul {
+  padding-left: 0;
+}
+
+.cont_plan_li {
+  margin-bottom: 20px;
+  position: relative;
+  list-style: none;
+  border-bottom: 1px solid #dcdcdc;
+  padding-left: 10px;
+}
+
+.cont_plan_text {
+  margin: 0;
+  line-height: 1;
+  margin-bottom: 10px;
+}
+
+.estimate_text {
+  padding-left: 10px;
+}
+
+.cont_plan_delete {
+  position: absolute;
+  bottom: 5px;
+  right: 0;
+}
+
+.cont_plan_delete i {
+  font-size: 20px;
+  color: rgba(0,0,0,.36);
+}
+
 .sub_item table {
   width: 100%;
   margin-top: 30px;
+  border: 1px solid #dcdcdc;
+  border-collapse: collapse;
 }
+
+.sub_item table th,
+.sub_item table td {
+  border: 1px solid #dcdcdc;
+}
+
+
+
+
+
+
+
+
 
 
 @media(max-width:1120px) {
@@ -484,6 +537,24 @@ main {
   .sub_item {
     max-width: 600px;
     margin: 50px auto;
+  }
+}
+
+@media(max-width: 500px) {
+  main {
+    width: 90%
+  }
+
+  .cont_plan {
+    padding: 30px 15px
+  }
+
+  .cont_plan_text {
+    font-size: 13px;
+  }
+
+  .cp_iptxt input[type='text'] {
+    font-size: 13px;
   }
 }
 

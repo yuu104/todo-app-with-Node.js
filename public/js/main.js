@@ -7,7 +7,7 @@
   const add = document.getElementById('add');
   const subInp = document.querySelector('.sub_inp');
   const priorityFa = document.querySelector('.fa-list-ol');
-  const send = document.querySelector('.send');
+  const sendTask = document.querySelector('.send_task');
   const taskUl = document.getElementById('task_ul');
   const compUl = document.getElementById('comp_ul');
   const taskTitle = document.querySelector('.task_title');
@@ -17,13 +17,27 @@
   const priorityLabel = document.querySelectorAll('.priority_label');
   const editBtn = document.querySelectorAll('.edit_btn');
   const editBox = document.querySelectorAll('.edit_box');
+  const contPlanForm = document.querySelector('.cont_plan_form');
+  const sendContPlan = document.querySelector('.send_cont_plan');
 
 
 
+  function inpCheck(sendItem, formName) {
+    sendItem.addEventListener('click', () => {
+      const inputs = formName.getElementsByTagName('input');
+      for(let i = 0; i < inputs.length; i++) {
+        if(inputs[i].value === '') {
+          swal('入力されていない箇所があります');
+          return;
+        }
+      }
+      formName.submit();
+    });
+  }
 
 
 
-  window.onload = function() {
+  window.onload = function() { 
     if(taskUl.childElementCount) {
       taskTitle.style.display = 'inline-block';
     } else {
@@ -36,13 +50,10 @@
     }
   }
 
-  send.addEventListener('click', () => {
-    if(add.value !== "") {
-      document.todo_form.submit();
-    } else {
-      alert("タスクを入力してください");
-    }
-  });
+
+
+  inpCheck(sendTask, todoForm);
+  inpCheck(sendContPlan, contPlanForm);
 
   taskTitle.addEventListener('click', () => {
     taskUl.classList.toggle('close');

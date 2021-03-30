@@ -51,7 +51,7 @@
                 </ul>
               </div>
             </div>
-            <a href="javascript:void(0)" class="send">
+            <a href="javascript:void(0)" class="send send_task">
               <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
             </a>
           </div>
@@ -69,7 +69,9 @@
                   <div class="todo_ul_contents">
                     <span><%= item.task %></span>
                     <div class="edit">
-                      <a class="edit_btn" id="<%= `editBtn_${i}` %>">編集</a>
+                      <a class="edit_btn" id="<%= `editBtn_${i}` %>">
+                        <i class="far fa-edit"></i>
+                      </a>
                       <form action="/renew/<%= item.id %>" class="edit_box" name="renew_form" onsubmit="return false;" method="POST">
                         <input type="text" name="editTaskName" value="<%= item.task %>" class="edit_task_inp">
                         <p class="edit_priority_title">優先度</p>                   
@@ -95,7 +97,9 @@
                       </form>
                     </div>
                     <form action="/delete/<%= item.id %>" method="POST" class="delete">
-                      <a href="#" onclick="this.parentNode.submit()" class="delete_btn">削除</a>
+                      <a href="#" onclick="this.parentNode.submit()" class="delete_btn">
+                        <i class="far fa-trash-alt"></i>
+                      </a>
                     </form>
                   </div>
                 </li>
@@ -122,20 +126,24 @@
           </ul>
         </div>
       </div>
+
       <div class="sub_item">
         <div class="cont_plan">
           <h3>偶然性プランニング</h3>
-          <form action="/planing" method="POST" class="cont_plan_form" onsubmit="return false">
+          <form action="/planing" method="POST" class="cont_plan_form">
             <div class="cp_iptxt">
 	            <input class="ef" type="text" name="estimate" required>
 	            <label>予測</label>
 	            <span class="focus_line"></span>
             </div>
-            <div class="cp_iptxt">
+            <div class="cp_iptxt cp_iptxt_measure">
 	            <input class="ef" type="text" name="measure" required>
 	            <label>対策</label>
 	            <span class="focus_line"></span>
             </div>
+            <a href="javascript:void(0)" class="send send_cont_plan">
+              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M2.01 21L23 12 2.01 3 2 10l15 2-15 2z"/></svg>
+            </a>
           </form>
           <ul class="cont_plan_ul">
             <% contPlans.forEach(contPlan => { %>
@@ -146,13 +154,15 @@
                     <%= contPlan.measure %>
                   </p>
                   <form action="/contPlanDelete/<%= contPlan.id %>" method="POST" class="cont_plan_delete">
-                    <a href="#" onclick="this.parentNode.submit()">削除</a>
+                    <a href="#" onclick="this.parentNode.submit()">
+                      <i class="far fa-trash-alt"></i>
+                    </a>
                   </form>
                 </li>
             <% }) %>
           </ul>
         </div>
-        <table border="1" style="border-collapse: collapse" cellpadding="10">
+        <table cellpadding="10">
         <tr align="left">
           <th>タスク総数</th>
           <td><%= countTotal %>個</td>
@@ -175,5 +185,6 @@
   </main>
 
   <script src="/js/main.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/sweetalert/2.1.2/sweetalert.min.js"></script>
 </body>
 </html>
