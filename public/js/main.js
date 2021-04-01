@@ -19,6 +19,11 @@
   const editBox = document.querySelectorAll('.edit_box');
   const contPlanForm = document.querySelector('.cont_plan_form');
   const sendContPlan = document.querySelector('.send_cont_plan');
+  const questionBtn = document.querySelector('.question_btn');
+  const modalMask = document.getElementById('modal_mask');
+  const modalContents = document.getElementById('modal_contents');
+  const modalClose = document.querySelector('.modal_close');
+
 
 
 
@@ -33,6 +38,10 @@
       }
       formName.submit();
     });
+  }
+
+  function noEvent(e) {
+    e.preventDefault();
   }
 
 
@@ -116,6 +125,27 @@
       } 
     });
   }
+
+  questionBtn.addEventListener('click', () => {
+    modalMask.classList.remove('hidden');
+    modalContents.classList.remove('hidden');
+    document.addEventListener('touchmove', noEvent, { passive: false });
+    document.addEventListener('mousewheel', noEvent, { passive: false });
+  });
+
+  modalMask.addEventListener('click', () => {
+    modalMask.classList.add('hidden');
+    modalContents.classList.add('hidden');
+    document.removeEventListener('touchmove', noEvent, { passive: false });
+    document.removeEventListener('mousewheel', noEvent, { passive: false });
+  });
+
+  modalClose.addEventListener('click', () => {
+    modalMask.classList.add('hidden');
+    modalContents.classList.add('hidden');
+    document.removeEventListener('touchmove', noEvent, { passive: false });
+    document.removeEventListener('mousewheel', noEvent, { passive: false });
+  });
 
 
 
