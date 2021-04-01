@@ -7,7 +7,7 @@
   const add = document.getElementById('add');
   const subInp = document.querySelector('.sub_inp');
   const priorityFa = document.querySelector('.fa-list-ol');
-  const send = document.querySelector('.send');
+  const sendTask = document.querySelector('.send_task');
   const taskUl = document.getElementById('task_ul');
   const compUl = document.getElementById('comp_ul');
   const taskTitle = document.querySelector('.task_title');
@@ -17,14 +17,36 @@
   const priorityLabel = document.querySelectorAll('.priority_label');
   const editBtn = document.querySelectorAll('.edit_btn');
   const editBox = document.querySelectorAll('.edit_box');
+  const contPlanForm = document.querySelector('.cont_plan_form');
+  const sendContPlan = document.querySelector('.send_cont_plan');
+  const questionBtn = document.querySelector('.question_btn');
+  const modalMask = document.getElementById('modal_mask');
+  const modalContents = document.getElementById('modal_contents');
+  const modalClose = document.querySelector('.modal_close');
 
 
 
 
+  function inpCheck(sendItem, formName) {
+    sendItem.addEventListener('click', () => {
+      const inputs = formName.getElementsByTagName('input');
+      for(let i = 0; i < inputs.length; i++) {
+        if(inputs[i].value === '') {
+          swal('入力されていない箇所があります');
+          return;
+        }
+      }
+      formName.submit();
+    });
+  }
+
+  function noEvent(e) {
+    e.preventDefault();
+  }
 
 
 
-  window.onload = function() {
+  window.onload = function() { 
     if(taskUl.childElementCount) {
       taskTitle.style.display = 'inline-block';
     } else {
@@ -37,13 +59,10 @@
     }
   }
 
-  send.addEventListener('click', () => {
-    if(add.value !== "") {
-      document.todo_form.submit();
-    } else {
-      alert("タスクを入力してください");
-    }
-  });
+
+
+  inpCheck(sendTask, todoForm);
+  inpCheck(sendContPlan, contPlanForm);
 
   taskTitle.addEventListener('click', () => {
     taskUl.classList.toggle('close');
@@ -82,7 +101,6 @@
     add.style.backgroundColor = '#fff';
   });
 
-
   document.addEventListener('click', (e) => {
     if(!e.target.closest('#todo_form')) {
       todoForm.style.border = 'none';
@@ -108,8 +126,26 @@
     });
   }
 
+  questionBtn.addEventListener('click', () => {
+    modalMask.classList.remove('hidden');
+    modalContents.classList.remove('hidden');
+    document.addEventListener('touchmove', noEvent, { passive: false });
+    document.addEventListener('mousewheel', noEvent, { passive: false });
+  });
 
+  modalMask.addEventListener('click', () => {
+    modalMask.classList.add('hidden');
+    modalContents.classList.add('hidden');
+    document.removeEventListener('touchmove', noEvent, { passive: false });
+    document.removeEventListener('mousewheel', noEvent, { passive: false });
+  });
 
+  modalClose.addEventListener('click', () => {
+    modalMask.classList.add('hidden');
+    modalContents.classList.add('hidden');
+    document.removeEventListener('touchmove', noEvent, { passive: false });
+    document.removeEventListener('mousewheel', noEvent, { passive: false });
+  });
 
 
 
