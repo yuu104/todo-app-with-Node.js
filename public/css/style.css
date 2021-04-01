@@ -654,6 +654,27 @@ main {
   .cp_iptxt input[type='text'] {
     font-size: 13px;
   }
+
+  #modal_contents {
+    width: 90%;
+    box-sizing: border-box;
+  }
+
+  #modal_contents h2 {
+    font-size: 17px;
+  }
+
+  .modal_contents_desc {
+    font-size: 15px;
+  }
+
+  .modal_contents_ul {
+    padding-left: 15px;
+  }
+
+  .modal_contents_ul p {
+    font-size: 15px;
+  }
 }
 
 
