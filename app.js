@@ -6,6 +6,7 @@
   const app = express();
   const mysql = require('mysql');
   const ejs = require('ejs');
+  const port = process.env.PORT || 5000;
 
   const con = mysql.createConnection({
     host: 'localhost',
@@ -143,7 +144,7 @@
 
 
 
-  app.listen(3000, () => {
+  app.listen(port, () => {
     console.log('Start server port:3000');
   });
 

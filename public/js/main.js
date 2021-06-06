@@ -94,7 +94,7 @@
     });
   });
 
-  add.addEventListener('click', () => {
+  add.addEventListener('focus', () => {
     todoForm.style.border = '1px solid #6495ed'
     todoForm.style.backgroundColor = '#fff';
     subInp.style.display = 'flex';
