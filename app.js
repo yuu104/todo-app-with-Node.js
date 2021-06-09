@@ -8,11 +8,12 @@
   const ejs = require('ejs');
   const port = process.env.PORT || 5000;
 
+  const databaseName = 'heroku_ab8c7c0b754d4e6'
   const con = mysql.createConnection({
-    host: 'localhost',
-    user: 'root',
-    password: 'zuvm8152',
-    database: 'todo_app_node'
+    host: 'us-cdbr-east-04.cleardb.com',
+    user: 'b1da43c7e2a04d',
+    password: 'bd43d989',
+    database: 'heroku_ab8c7c0b754d4e6'
   });
 
   app.engine('ejs', ejs.renderFile);  
@@ -34,6 +35,10 @@
 
   app.get('/', (req, res) => {
     con.query(
+      con.query('create database if not exists ??:', databaseName),
+      con.query('use ??', databaseName),
+      con.query('create table if not exists doTasks(id int(11) PRI auto_increment, task text, priority text, isDone text)'),
+      con.query('create table if not exists contPlan(id int(11) PRI auto_increment, estimate text, measure text'),
       'SELECT * FROM doTasks WHERE isDone="no" ORDER BY priority',
       (error_d, results_d) => {
         con.query(
