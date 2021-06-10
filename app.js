@@ -35,10 +35,12 @@
 
   app.get('/', (req, res) => {
     con.query(
+      /*
       con.query('create database if not exists ??:', databaseName),
       con.query('use ??', databaseName),
       con.query('create table if not exists doTasks(id int(11) PRI auto_increment, task text, priority text, isDone text)'),
       con.query('create table if not exists contPlan(id int(11) PRI auto_increment, estimate text, measure text'),
+      */
       'SELECT * FROM doTasks WHERE isDone="no" ORDER BY priority',
       (error_d, results_d) => {
         con.query(
